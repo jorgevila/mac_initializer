@@ -18,12 +18,21 @@ funHomebrew() {
     sleep 2
 }
 
+funUntapTap() {
+    echo -e "*** Untap and tap brew repos ***"
+    sleep 1
+    brew untap phinze/cask && brew tap phinze/cask
+    brew untap caskroom/versions && brew tap caskroom/versions
+    brew untap casidiablo/custom && brew tap casidiablo/custom
+    sleep 2
+}
+
 funBrewPackages() {
     echo -e "*** Installing Brew Packages ***"
     sleep 1
-    brew tap phinze/cask
-    brew tap caskroom/versions
-    brew tap casidiablo/custom
+    funUntapTap
+    brew install android-platform-tools
+    brew install ant
     brew install autoconf
     brew install automake
     brew install brew-cask
@@ -54,7 +63,9 @@ funBrewPackages() {
     brew install openssl
     brew install pcre
     brew install phantomjs
+    brew install protobuf
     brew install python
+    brew install ssh-copy-id
     brew install tree
     brew install wget
     brew install xz
@@ -98,6 +109,7 @@ funCaskPackages() {
     brew cask install sublime-text
     brew cask install techstoreclub-simple-comic
     brew cask install the-unarchiver
+    brew cask install tomighty
     brew cask install tunnelblick
     brew cask install vagrant
     brew cask install virtualbox
@@ -111,14 +123,18 @@ funCaskPackages() {
 funNPM() {
     echo -e "*** Installing NPM Packages ***"
     sleep 1
+    npm install -g n
     npm install -g yo
     npm install -g bower
+    npm install -g eslint
     npm install -g grunt-cli
     npm install -g gulp
     npm install -g less
     npm install -g coffee-script
     npm install -g jshint
     npm install -g node-inspector
+    npm install -g generator-polymer
+    npm install -g babel
     echo -e "*** Installed NPM Packages! ***"
     sleep 2
 }
@@ -135,7 +151,6 @@ funAPM() {
     apm install color-picker
     apm install emmet
     apm install git-plus
-    apm install nuclide-installer
     echo -e "*** Installed Atom Packages! ***"
     sleep 2
 }
@@ -163,6 +178,7 @@ funScripts() {
     mkdir $BACKUP_FOLDER
     mv .bowerrc $BACKUP_FOLDER
     mv .gitconfig $BACKUP_FOLDER
+    mv .gitignore $BACKUP_FOLDER
     mv .zshrc $BACKUP_FOLDER
     mv .zshrc.d $BACKUP_FOLDER/.zshrc.d
     mv .screenrc $BACKUP_FOLDER
@@ -177,6 +193,7 @@ funScripts() {
     ln -s $CURRENT_FOLDER/dotfiles/bowerrc .bowerrc
     ln -s $CURRENT_FOLDER/dotfiles/zshrc .zshrc
     ln -s $CURRENT_FOLDER/dotfiles/gitconfig .gitconfig
+    ln -s $CURRENT_FOLDER/dotfiles/gitignore .gitignore
     ln -s $CURRENT_FOLDER/dotfiles/screenrc .screenrc
     ln -s $CURRENT_FOLDER/dotfiles/vimrc .vimrc
     ln -s $CURRENT_FOLDER/dotfiles/osx .osx
@@ -200,6 +217,7 @@ funScripts() {
 }
 
 funUpdateAll() {
+    funUntapTap
     echo -e "*** Updating brew packages ***"
     sleep 1
     brew update && brew upgrade --all
@@ -208,13 +226,18 @@ funUpdateAll() {
     sleep 1
     brew cask update
     sleep 2
+    echo -e "*** Updating Node.js stable (using n) and NPM ***"
+    sleep 1
+    sudo n stable
+    curl -L https://www.npmjs.com/install.sh | sudo sh
+    sleep 2
     echo -e "*** Updating npm packages ***"
     sleep 1
     npm update -g
     sleep 2
     echo -e "*** Updating atom packages ***"
     sleep 1
-    apm update
+    apm update --confirm=false
     echo -e "*** Everything updated! ***"
     sleep 2
 }
@@ -231,6 +254,8 @@ funCleanCaches() {
 }
 
 clear
+echo "Sudoing first"
+sudo echo ""
 while [ $EXIT==0 ]
 do
     echo -e "*****************************************************************"
