@@ -32,3 +32,32 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
+export PATH=/Library/Frameworks/Python.framework/Versions/Current/bin:/usr/local/bin:$PATH
+export WORKON_HOME=$HOME/virtualenvs
+source /Library/Frameworks/Python.framework/Versions/2.7/bin/virtualenvwrapper.sh
+alias hibernateon="sudo pmset -a hibernatemode 5"
+alias hibernateoff="sudo pmset -a hibernatemode 0"
+
+#MYSQL
+alias mysql=/usr/local/mysql/bin/mysql
+alias mysqladmin=/usr/local/mysql/bin/mysqladmin
+
+#JAVA
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home
+export JRE_HOME=$JAVA_HOME
+
+#ANDROID
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools:$PATH
+
+# source .bash-git-prompt/gitprompt.sh
+
+alias mca='cd ~/mca/git/mca-paytv-android'
+alias mcap='cd ~/mca/git/mca-paytvapp-android'
+alias gvpclient='cd ~/mca/git/mca-gvpclient-android'
+alias playerlib='cd ~/mca/git/mca-playerlib/android'
+
+alias logcatgo='function _t() {echo Filtering:$1; adb logcat -vtime | grep `adb shell "ps | grep $1" | cut -c10-15`}; _t'
+alias gitg="git log --graph --pretty=oneline --abbrev-commit --decorate"
+
+

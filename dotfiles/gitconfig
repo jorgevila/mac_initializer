@@ -1,6 +1,6 @@
 [user]
-  name = Sergio Ruiz
-  email = serginator@gmail.com
+	name = Jorge Vila
+	email = jorge.vila@gmail.com
 
 [core]
   editor = vim
@@ -88,3 +88,7 @@
 [hub]
   host = pdihub.hi.inet
 
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true

@@ -68,10 +68,10 @@ augroup vimscript
 augroup END
 
 "Force to use hjkl to learn
-noremap <left> <nop>
-noremap <right> <nop>
-noremap <up> <nop>
-noremap <down> <nop>
+"noremap <left> <nop>
+"noremap <right> <nop>
+"noremap <up> <nop>
+"noremap <down> <nop>
 nnoremap / /\v
 vnoremap / /\v
 nnoremap ? ?\v
