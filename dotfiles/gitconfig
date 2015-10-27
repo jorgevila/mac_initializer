@@ -96,3 +96,9 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+
+[alias]
+    prev = checkout HEAD^1
+    next = "!sh -c 'git log --reverse --pretty=%H develop | awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
+
+
